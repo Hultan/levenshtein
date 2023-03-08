@@ -50,17 +50,17 @@ func lev(source, dest []rune) int {
 	return 1 + min(l1, l2, l3)
 }
 
-func min(lev1, lev2, lev3 int) int {
+func min(lev ...int) int {
 	// Assume the first value is the smallest
-	m := lev1
-	// Check the second value
-	if lev2 < m {
-		m = lev2
+	m := lev[0]
+
+	// Loop through the remaining values
+	for i := 1; i < len(lev); i++ {
+		if lev[i] < m {
+			m = lev[i]
+		}
 	}
-	// Check the third value
-	if lev3 < m {
-		m = lev3
-	}
+
 	// Return the smallest
 	return m
 }
