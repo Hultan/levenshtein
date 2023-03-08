@@ -19,10 +19,15 @@ func TestLev(t *testing.T) {
 		{"apple/apple=0", args{"apple", "apple"}, 0},
 		{"apple/dapple=1", args{"apple", "dapple"}, 1},
 		{
-			"abcdefghijklmnopqrstuvxyzåäö/abcdefghijklmnopqrstuvxyzåä=1",
+			"alfabet/alfabet-1=1",
 			args{"abcdefghijklmnopqrstuvxyzåäö", "abcdefghijklmnopqrstuvxyzåä"}, 1,
 		},
+		{"long/long=24", args{"sdfpioudfglkjaweoiulknsdasdasd", "cxvpouwejk,mnasdljkhasdlkhasdiu"}, 24},
 		{"cattle/apple=1", args{"cattle", "apple"}, 3},
+		{"foo/bar=3", args{"foo", "bar"}, 3},
+		{"foo/foooooo=4", args{"foo", "foooooo"}, 4},
+		{"foooooo/foo=4", args{"foooooo", "foo"}, 4},
+		{"世界世界世界/foo=6", args{"世界世界世界", "foo"}, 6},
 	}
 	for _, tt := range tests {
 		t.Run(
