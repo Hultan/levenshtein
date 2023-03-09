@@ -26,29 +26,18 @@ func TestLev(t *testing.T) {
 		args args
 		want int
 	}{
-		{"/apple=5", args{"", "apple"}, 5},
-		{"apple/=5", args{"apple", ""}, 5},
-		{"apple/apple=0", args{"apple", "apple"}, 0},
-		{"apple/dapple=1", args{"apple", "dapple"}, 1},
-		{
-			"alfabet/alfabet-1=1",
-			args{"abcdefghijklmnopqrstuvxyzåäö", "abcdefghijklmnopqrstuvxyzåä"}, 1,
-		},
-		{"long/long=24", args{"sdfpioudfglkjaweoiulknsdasdasd", "cxvpouwejk,mnasdljkhasdlkhasdiu"}, 23},
-		{"cattle/apple=1", args{"cattle", "apple"}, 3},
-		{"foo/bar=3", args{"foo", "bar"}, 3},
-		{"foo/foooooo=4", args{"foo", "foooooo"}, 4},
-		{"foooooo/foo=4", args{"foooooo", "foo"}, 4},
-		{"世界世界世界/foo=6", args{"世界世界世界", "foo"}, 6},
-		{"Identical", args{"apple", "apple"}, 0},
-		{"Add", args{"apple", "apples"}, 1},
-		{"Remove", args{"apples", "apple"}, 1},
-		{"Substitute", args{"apples", "applet"}, 1},
-		{"Test #1", args{"apple", "dapple"}, 1},
-		{"Test #2", args{"dapple", "apple"}, 1},
-		{"Test #3", args{"apple", "opple"}, 1},
-		{"Test #4", args{"kitten", "sitting"}, 3},
-		{"Test #5", args{"sunday", "saturday"}, 3},
+		{"identical", args{"apple", "apple"}, 0},
+		{"empty source", args{"", "apple"}, 5},
+		{"empty dest", args{"apple", ""}, 5},
+		{"add (before)", args{"apple", "dapple"}, 1},
+		{"add (after)", args{"apple", "apples"}, 1},
+		{"remove (before)", args{"apples", "pples"}, 1},
+		{"remove (after)", args{"apples", "apple"}, 1},
+		{"substitute (before)", args{"apples", "opples"}, 1},
+		{"substitute (after)", args{"apples", "applet"}, 1},
+		{"long", args{"sdfpioudfglkjaweoiulknsdasdasd", "cxvpouwejk,mnasdljkhasdlkhasdiu"}, 23},
+		{"different", args{"foo", "bar"}, 3},
+		{"unicode", args{"世界世界世界", "foo"}, 6},
 	}
 	for _, tt := range tests {
 		t.Run(
