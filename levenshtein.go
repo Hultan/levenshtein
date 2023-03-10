@@ -1,14 +1,17 @@
 package levenshtein
 
+// Lev calculates the Levenshtein distance between two strings.
+// See https://en.wikipedia.org/wiki/Levenshtein_distance for
+// more information.
 func Lev(source, dest string) int {
 	return lev([]rune(source), []rune(dest))
 }
 
+// lev calculates the Levenshtein distance between two rune slices.
 func lev(source, dest []rune) int {
 	m := len(source)
 	n := len(dest)
 
-	// Create array
 	d := make([][]int, m+1)
 	for i := 0; i <= m; i++ {
 		d[i] = make([]int, n+1)
@@ -40,6 +43,8 @@ func lev(source, dest []rune) int {
 	return d[m][n]
 }
 
+// min returns the lowest value of the arguments.
+// Example: min(3,5,1,7) returns 1.
 func min(lev ...int) int {
 	// Assume the first value is the smallest
 	m := lev[0]
