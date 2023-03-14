@@ -1,19 +1,13 @@
 package levenshtein
 
 import (
-	"fmt"
 	"testing"
-	"time"
 )
 
-func TestLevPerf(t *testing.T) {
-	start := time.Now()
-
-	for i := 0; i < 1000000; i++ {
+func BenchmarkLevPerf(t *testing.B) {
+	for i := 0; i < t.N; i++ {
 		Lev("Skruvmejsel", "hammare")
 	}
-
-	fmt.Println(time.Since(start).Milliseconds())
 }
 
 func TestLev(t *testing.T) {
